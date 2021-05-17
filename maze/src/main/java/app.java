@@ -189,7 +189,10 @@ public class app extends Application {
         pane.getChildren().add(rec);// Show target block
         return pane;
     }
-
+    /**
+     * Egy bot ami kiviszi a pályánkat
+     * @param e várja a kezdő pocitcióját a bot
+     */
     public void autoMove(node e) {
         SequentialTransition link = new SequentialTransition();// Animation list
         link.setNode(rec);
