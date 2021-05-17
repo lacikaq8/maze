@@ -39,23 +39,23 @@ public class app extends Application {
     /**
      * a mapunk merete amit majd a prim algoritmus felhasznal a map genarashoz
      */
-    public int Size = 15;// Effective map size, used for Prim algorithm to generate map
+    public int Size = 15;
     /**
      * cellánk side hosszusaga
      */
-    public static final int Range = 30;// cell side length
+    public static final int Range = 30;
     /**
      * a mapunk igazi mérete
      */
-    public int VSize = (Size * 2 + 1) * Range;// Actual map size
+    public int VSize = (Size * 2 + 1) * Range;
     /**
      * térképünk
      */
-    public int maze[][] = new int[VSize][VSize];// map
+    public int maze[][] = new int[VSize][VSize];
     /**
      * a már látogatott utvonal
      */
-    public int vis[][] = new int[VSize][VSize];// Visited path
+    public int vis[][] = new int[VSize][VSize];
     /**
      * uj nodot csinálunk
      */
@@ -63,7 +63,7 @@ public class app extends Application {
     /**
      * mozgatási directionünk
      */
-    public int[][] dir = { { -Range, 0 }, { Range, 0 }, { 0, -Range }, { 0, Range } };// moving direction
+    public int[][] dir = { { -Range, 0 }, { Range, 0 }, { 0, -Range }, { 0, Range } };
     /**
      * meghivjuk a createmap osztályt
      */
@@ -73,6 +73,16 @@ public class app extends Application {
      */
     Rectangle rec = new Rectangle(Range, Range, Range, Range);
     private int recX = 30, recY = 30;
-    private boolean autoPath = false;// Whether to enable automatic solution
+    private boolean autoPath = false;
+
+    /**
+     * Csekkolja hogy bent vagyunk e
+     * @param fx x pozitcio
+     * @param fy y pozitcio
+     * @return true-t vagy false-t ad ha bent vagyunk
+     */
+    boolean inside(int fx, int fy) {
+        return (fx >= Range && fx <= VSize - Range && fy >= Range && fy <= VSize - Range); //range 30 vsize 31*30
+    }
 }
 
