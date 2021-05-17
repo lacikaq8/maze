@@ -94,7 +94,7 @@ public class app extends Application {
         link.getChildren().add(tt);
         link.play();
     }
-    
+
     /**
      * Itt hivjuk meg a Initünket hogy lekeráljuk a mapunk
      */
@@ -105,6 +105,32 @@ public class app extends Application {
                 maze[i][j] = c.map[i / Range][j / Range];
             }
         } // Maze mapping
+    }
+
+    /**
+     * tábla inicializálás
+     * @return táblánkat
+     */
+    public Pane Init() {
+
+        Pane pane = new Pane();
+        for (int i = 0; i < VSize; i += Range) {
+            for (int j = 0; j < VSize; j += Range) {
+                Rectangle r = new Rectangle(i, j, Range, Range);
+                if (maze[i][j] == 0) {
+                    r.setFill(Color.BLACK);
+                } else if (maze[i][j] == 1) {
+                    r.setFill(Color.WHITE);
+                }
+                if (i == VSize - Range && j == VSize - Range * 2) {
+                    r.setFill(Color.GREEN);
+                }
+                pane.getChildren().add(r);
+            }
+        }
+        rec.setFill(Color.RED);
+        pane.getChildren().add(rec);// Show target block
+        return pane;
     }
 
     /**
