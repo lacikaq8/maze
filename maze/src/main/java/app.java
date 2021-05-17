@@ -94,6 +94,18 @@ public class app extends Application {
         link.getChildren().add(tt);
         link.play();
     }
+    
+    /**
+     * Itt hivjuk meg a Initünket hogy lekeráljuk a mapunk
+     */
+    public void CreateMap() {
+        c.Init();// Generate maze
+        for (int i = 0; i < VSize; i += Range) {
+            for (int j = 0; j < VSize; j += Range) {
+                maze[i][j] = c.map[i / Range][j / Range];
+            }
+        } // Maze mapping
+    }
 
     /**
      * Csekkolja hogy bent vagyunk e
