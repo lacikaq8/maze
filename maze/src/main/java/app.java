@@ -75,6 +75,7 @@ public class app extends Application {
     private int recX = 30, recY = 30;
     private boolean autoPath = false;
 
+
     /**
      * Mozgással felelős metódus
      * @param tx x sik
@@ -131,6 +132,63 @@ public class app extends Application {
         rec.setFill(Color.RED);
         pane.getChildren().add(rec);// Show target block
         return pane;
+    }
+
+    public void autoMove(node e) {
+        SequentialTransition link = new SequentialTransition();// Animation list
+        link.setNode(rec);
+        Queue<node> queue = new ArrayBlockingQueue<node>(1000);
+        int flag = 0;
+        System.out.println(e.x + " " + e.y);
+        queue.add(e);
+        vis[e.x][e.y] = 1;// visited
+        while (flag == 0) {// Breadth first traversal, find the shortest path
+            node now = queue.remove();
+            for (int i = 0; i < 4; i++) {
+                int fx = now.x + dir[i][0];
+                int fy = now.y + dir[i][1];
+                if ((inside(fx, fy) && (vis[fx][fy] == 0) && maze[fx][fy] == 1)) {
+                    vis[fx][fy] = 1;
+                    f[fx][fy] = new node(now.x, now.y);
+                    queue.add(new node(fx, fy));
+                }
+                if (fx == VSize - Range * 2 && fy == VSize - Range * 2) {// start backtracking when one way reaches the end
+
+                    node ans[] = new node[1000];
+                    int cnt = 0;
+                    int t1, t2;
+                    ans[cnt] = new node(fx, fy);
+                    while (f[fx][fy].x != e.x || f[fx][fy].y != e.y) {// Trace back according to the coordinates of the previous point recorded by the point to get the shortest path to the point.
+                        t1 = fx;
+                        t2 = fy;
+                        cnt++;
+                        ans[cnt] = new node(f[fx][fy].x, f[fx][fy].y);
+                        fx = f[t1][t2].x;
+                        fy = f[t1][t2].y;
+                    }
+
+                    ans[++cnt] = new node(0, 0);
+
+                    for (int l = cnt - 1; l > 0; l--) {
+                        // move(ans[l].x, ans[l].y);
+                        // System.out.println(recX + " " + recY + " " + ans[l].x + " " + ans[l].y);
+                        // recX = ans[l].x;
+                        // recY = ans[l].y;
+                        TranslateTransition tt = new TranslateTransition();
+                        tt.setFromX(ans[l].x - 30);
+                        tt.setToX(ans[l - 1].x - 30);
+                        tt.setFromY(ans[l].y - 30);
+                        tt.setToY(ans[l - 1].y - 30);
+                        link.getChildren().add(tt);
+                    }
+                    flag = 1;
+                    break;
+
+                }
+            }
+        }
+        link.play();
+
     }
 
     /**
