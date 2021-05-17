@@ -75,7 +75,63 @@ public class app extends Application {
     private int recX = 30, recY = 30;
     private boolean autoPath = false;
 
+    /**
+     * Alkalmazásunk startja
+     * @param stage vár egy staget
+     * @throws Exception Kiirjuk ha hiba van
+     */
+    public void start(Stage stage) throws Exception {
+        CreateMap();
+        Pane pane = Init();// Generate maze platform
+        Scene scene = new Scene(pane, VSize, VSize);
 
+        scene.setOnKeyPressed(k -> {
+            KeyCode code = k.getCode();
+            int tx = recX, ty = recY;
+            if (code.equals(KeyCode.LEFT) && autoPath == false) { // Left button pressed
+                tx -= Range;
+            } else if (code.equals(KeyCode.RIGHT) && autoPath == false) {// Right clicked
+                tx += Range;
+            } else if (code.equals(KeyCode.UP) && autoPath == false) {// Pressed the up arrow key
+                ty -= Range;
+            } else if (code.equals(KeyCode.DOWN) && autoPath == false) {// Pressed down arrow key
+                ty += Range;
+            } else if (code.equals(KeyCode.SPACE)) {
+                if (autoPath == false) {
+                    autoPath = true;
+                    node e = new node();
+                    e.set(recX, recY);
+                    autoMove(e);
+                }
+            }
+            if (inside(tx, ty) && maze[tx][ty] == 1 && autoPath == false) {
+                // System.out.println(recX+" "+recY+" "+tx + " " + ty);
+                move(tx, ty);
+                recX = tx;
+                recY = ty;
+            } else if (recX == VSize - Range * 2 && recY == VSize - Range * 2) {// Determine whether out of bounds and hit the wall
+                Alert alert = new Alert(AlertType.INFORMATION);
+                Button button = new Button("Accept");
+                alert.titleProperty().set("information");
+                alert.headerTextProperty().set("You WIN!!!!");
+                alert.showAndWait();
+                try {
+                    start(stage);
+                } catch (Exception e) {
+                    // TODO automatically generated catch block
+                    e.printStackTrace();
+                }
+                move(Range, Range);
+                recX = Range;
+                recY = Range;
+            }
+        });
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.setTitle("maze");
+        stage.show();
+
+    }
     /**
      * Mozgással felelős metódus
      * @param tx x sik
