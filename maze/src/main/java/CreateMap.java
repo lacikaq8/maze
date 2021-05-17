@@ -26,5 +26,25 @@ public class CreateMap {
 
         map = new int[r][c];
     }
+    /**
+     * Inicializaljuk a mazeunket builderünket
+     */
+    public void Init() {
+
+        for (int i = 0; i < r; i++)
+            for (int j = 0; j < c; j++)
+                map[i][j] = 0;
+        for (int i = 0; i < row; i++)
+            for (int j = 0; j < column; j++)
+                map[2 * i + 1][2 * j + 1] = 1;
+
+        accLabPrime();
+    }
+    /**
+     * Maze builder
+     */
+    public void accLabPrime() {
+
+    }
 }
 
