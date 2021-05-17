@@ -76,6 +76,26 @@ public class app extends Application {
     private boolean autoPath = false;
 
     /**
+     * Mozgással felelős metódus
+     * @param tx x sik
+     * @param ty y sik
+     */
+    public void move(int tx, int ty) {
+        SequentialTransition link = new SequentialTransition();// Animation list
+        link.setNode(rec);
+        TranslateTransition tt = new TranslateTransition();
+
+        tt.setFromX(recX - 30);
+        tt.setToX(tx - 30);
+        tt.setFromY(recY - 30);
+        tt.setToY(ty - 30);
+
+        // System.out.println(recX+" "+recY+" "+tx+" "+ty);
+        link.getChildren().add(tt);
+        link.play();
+    }
+
+    /**
      * Csekkolja hogy bent vagyunk e
      * @param fx x pozitcio
      * @param fy y pozitcio
