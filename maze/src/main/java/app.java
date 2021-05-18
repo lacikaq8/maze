@@ -111,9 +111,9 @@ public class app extends Application {
                 recY = ty;
             } else if (recX == VSize - Range * 2 && recY == VSize - Range * 2) {// Determine whether out of bounds and hit the wall
                 Alert alert = new Alert(AlertType.INFORMATION);
-                Button button = new Button("Accept");
-                alert.titleProperty().set("information");
-                alert.headerTextProperty().set("You WIN!!!!");
+                Button button = new Button("go next");
+                alert.titleProperty().set("Megvan");
+                alert.headerTextProperty().set("EZCLAP");
                 alert.showAndWait();
                 try {
                     start(stage);
@@ -147,7 +147,7 @@ public class app extends Application {
         tt.setFromY(recY - 30);
         tt.setToY(ty - 30);
 
-        // System.out.println(recX+" "+recY+" "+tx+" "+ty);
+        System.out.println(recX+" "+recY+" "+tx+" "+ty);
         link.getChildren().add(tt);
         link.play();
     }

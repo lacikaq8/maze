@@ -1,7 +1,7 @@
 import javafx.application.Application;
 
 /**
- * main osztályunk tároloja
+ * main osztályunk
  */
 public class main {
     /**
