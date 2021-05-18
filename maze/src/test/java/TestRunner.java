@@ -3,6 +3,10 @@ import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
 public class TestRunner {
+    /**
+     * testrunner
+     * @param args
+     */
     public static void main(String[] args) {
         Result apptest = JUnitCore.runClasses(appTest.class);
         Result createmaptest = JUnitCore.runClasses(CreateMapTest.class);

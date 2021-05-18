@@ -6,6 +6,7 @@
         <artifactId>maze</artifactId>
         <version>1.0</version>
         <packaging>jar</packaging>
+        <url>https://github.com/lacikaq8/maze</url>
         <description>Egy labirintus játék melyben az lények hogy eljussunk a kezdőpontból a végpontba</description>
         <properties>
             <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
